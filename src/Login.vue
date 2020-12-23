@@ -1,20 +1,23 @@
 <template>
   <div id="app">
-  <div class = 'flags'>
-  <a  href ="#" @click="setLocale('en')"><flag iso="us" size='big'/></a>
-       &nbsp;&nbsp;
-  <a  href ="#" @click="setLocale('ua')"><flag  iso="ua" size='big'/></a>
-  </div>
-    <ul id="nav">
-     <li><router-link to="/supermarkets">{{$t('menuSupermarkets')}}</router-link></li>
-     <li><router-link to="/products">{{$t('menuProducts')}}</router-link></li>
-     <li><router-link to='/check'>{{$t('menuChecks')}}</router-link></li>
-     <li v-on:click="logout()"><a>{{$t('menuLogOut')}}</a></li>
-    </ul>
 
   <router-view></router-view>
+<div class = "nextpers">
+  <div class="login-page">
+  <div class="form">
+    <form form action="" method="post"  class="login-form" >
+      <input class="input1" type="text" name="username" v-model="input.username" placeholder="Логін" required/>
+      <input class="input1" type="password" name="password" v-model="input.password"  placeholder="Пароль" required/>
+      
+      <button class="cute_button" type="button" v-on:click="login()"> {{$t('logIn')}} </button>
+    </form>
+  </div>
+</div>
+</div>
+
 
   </div>
+
   
 </template>
 
@@ -38,7 +41,7 @@ export default {
       input: {
         username: "",
         password: ""
-      },
+      }
     }
   },
 
