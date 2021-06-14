@@ -1,16 +1,22 @@
 import Vue from 'vue'
 import App from './App.vue'
-import Supermarkets from './Supermarkets.vue'
-import Check from './Check.vue'
-import Products from './Products.vue'
 import LogIn from './Login.vue'
-import AddSupermarket from './AddSupermarket.vue'
-import AddProduct from './AddProduct.vue'
-import ShowCheck from './ShowCheck.vue'
 import VueRouter from 'vue-router'
 import {i18n} from './plugins/i18n'
 import FlagIcon from 'vue-flag-icon'
 import Vuex from "vuex"
+import Laundries from './Laundries.vue'
+import AddLaundry from './AddLaundry.vue'
+import Washers from './Washers.vue'
+import AddWasher from './AddWasher.vue'
+import Workers from './Workers.vue'
+import Customers from './Clients.vue'
+import Breakdowns from './Breakdowns.vue'
+import AddBreakdown from './AddBreakdown.vue'
+import ShowStory from './ShowStory.vue'
+import AddUser from './AddUser.vue'
+import './assets/style.scss'
+
 
 Vue.config.productionTip = false
 Vue.use(VueRouter);
@@ -20,12 +26,16 @@ Vue.use(Vuex);
 const store = new Vuex.Store(
   {
       state: {
-          authenticated: false
+          authenticated: false,
+          admin: false
       },
       mutations: {
           setAuthentication(state, status) {
               state.authenticated = status;
-          }
+          },
+          setAdmin(state, status) {
+            state.admin = status;
+        },
       }
   }
 );
@@ -42,9 +52,9 @@ const routes = [
       component: App 
     },
     { 
-      path: '/supermarkets',
-      name: 'supermarkets',
-      component: Supermarkets,
+      path: '/washers',
+      name: 'washers',
+      component: Washers,
       beforeEnter: (to, from, next) => {
         if(store.state.authenticated == false) {
           next(false);
@@ -54,10 +64,9 @@ const routes = [
        }
     },
     { 
-      path: '/check',
-      component: Check,
-      name: "check",
-      params: true ,
+      path: '/laundries',
+      component: Laundries,
+      name: "laundries",
       beforeEnter: (to, from, next) => {
         if(store.state.authenticated == false) {
           next(false);
@@ -67,9 +76,9 @@ const routes = [
        }
     },
     { 
-      path: '/products',
-      component: Products,
-      name: "products",
+      path: '/workers',
+      component:Workers,
+      name: "workers",
       beforeEnter: (to, from, next) => {
         if(store.state.authenticated == false) {
           next(false);
@@ -78,23 +87,58 @@ const routes = [
         }
        }
     },
+    { 
+      path: '/customers',
+      component:Customers,
+      name: "customers",
+      beforeEnter: (to, from, next) => {
+        if(store.state.authenticated == false) {
+          next(false);
+        } else {
+          next();
+        }
+       }
+    },
+
+    { 
+      path: '/breakdowns',
+      component:Breakdowns,
+      name: "breakdowns",
+      beforeEnter: (to, from, next) => {
+        if(store.state.authenticated == false) {
+          next(false);
+        } else {
+          next();
+        }
+       }
+    },
+
     { 
       path: '/login',
       name: "login",
       component: LogIn 
     },
     { 
-      path: '/add',
-      component: AddSupermarket 
+      path: '/addLaundry',
+      component: AddLaundry 
     },
     { 
-      path: '/addproduct',
-      component: AddProduct 
+      path: '/addWasher',
+      component: AddWasher 
     },
     { 
-      path: '/showcheck',
-      name: 'ShowCheck',
-      component: ShowCheck 
+      path: '/addbreakdown',
+      component: AddBreakdown
+    },
+    { 
+      path: '/showstory',
+      name: 'ShowStory',
+      component: ShowStory 
+    },
+    { 
+      path: '/registration',
+      name: 'AddUser',
+      component: AddUser 
     }
 
 ];

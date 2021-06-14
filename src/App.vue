@@ -1,15 +1,30 @@
+
+
 <template>
+
   <div id="app">
-  <div class = 'flags'>
-  <a  href ="#" @click="setLocale('en')"><flag iso="us" size='big'/></a>
+  <header>
+    <div class = 'flags'>
+  <a href ="#" @click="setLocale('en')"><flag iso="us" size='big'/></a>
        &nbsp;&nbsp;
-  <a  href ="#" @click="setLocale('ua')"><flag  iso="ua" size='big'/></a>
+  <a href ="#" @click="setLocale('ua')"><flag  iso="ua" size='big'/></a>
   </div>
+
+  </header>
     <ul id="nav">
-     <li><router-link to="/supermarkets">{{$t('menuSupermarkets')}}</router-link></li>
-     <li><router-link to="/products">{{$t('menuProducts')}}</router-link></li>
-     <li><router-link to='/check'>{{$t('menuChecks')}}</router-link></li>
-     <li v-on:click="logout()"><a>{{$t('menuLogOut')}}</a></li>
+     <li v-if="loggedOut"><router-link to="/customers">{{$t('main')}}</router-link></li>
+     <li v-if="loggedOut"><router-link to="/login">{{$t('logIn')}}</router-link></li>
+     <li v-if="loggedOut"><router-link to="/registration">{{$t('register')}}</router-link></li>
+
+
+
+
+     <li v-if="loggedIn"><router-link to="/customers">{{$t('menuCustomers')}}</router-link></li>
+     <li v-if="loggedIn"><router-link to="/laundries">{{$t('menuLaundries')}}</router-link></li>
+     <li v-if="loggedIn"><router-link to='/washers'>{{$t('menuWashers')}}</router-link></li>
+     <li v-if="admin && loggedIn"><router-link to='/workers'>{{$t('menuWorkers')}}</router-link></li>
+     <li v-if="loggedIn"><router-link to='/breakdowns'>{{$t('menuBreakdowns')}}</router-link></li>
+     <li v-if="loggedIn" v-on:click="logout()"><a>{{$t('menuLogOut')}}</a></li>
     </ul>
 
   <router-view></router-view>
@@ -20,32 +35,38 @@
 
 <script>
 
-import API from '@/services/api.js';
+
 
 export default {
   name: 'App',
   components: {}, 
   mounted() {
-      API().get('/supermarkets').then((response) =>{
-       this.supermarkets = response.data.data;
-      })
 
   },
 
   data() {
     return {
-      supermarkets: [],
-      input: {
-        username: "",
-        password: ""
-      },
+
     }
   },
 
+  computed: {
+        loggedIn () {
+            return this.$store.state.authenticated;
+        },
+        loggedOut () {
+            return !this.$store.state.authenticated;
+        },
+        locale () {
+            return this.$i18n.locale;
+        },
+        admin () {
+          return this.$store.state.admin;
+        }
+    },
+
   methods:{
     setLocale(locale){
-      
-
       import(`./langs/${locale}.json`).then((msgs) => {
         this.$i18n.setLocaleMessage(locale, msgs)
         this.$i18n.locale = locale
@@ -57,7 +78,7 @@ export default {
           this.$store.commit("setAuthentication", true);
           this.$router.replace({name: "supermarkets"});
        }
-       if(this.input.username == "cashier" && this.input.password == "1111") {
+       if(this.input.username == "worker" && this.input.password == "1111") {
          this.$store.commit("setAuthentication", true);
          this.$router.replace({name: "check"});
        }
@@ -74,94 +95,3 @@ export default {
 
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-#nav{
-   margin: 0;
-        padding: 0;
-        margin-left: 240px;
-        margin-right: 240px;
-        list-style-type: none; 
-        border: 2px double #000000; 
-        height: 30px;
-        width: 1023px;
-        text-align: center;
-        background: rgb(238,236,192);
-}
-#nav li{
-
-  display: inline;
-}
-#nav li a{
-      font-size: 16px; 
-        color: #000000;
-        padding: 5px 10px; 
-        text-decoration: none;
-        
-        display: inline-block; 
-        width: 140px;
-        height: 20px;
-}
-#nav li a:hover{
-        background-color: rgb(184,115,51);
-        color: #FFFFFF;
-        text-align: center;
-        font-weight: bold;
-      }
-
-.flags {
-  width: 10 px;
-  height: 5 px;
-}
-
-.input1 {
-  font-family: "Roboto", sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 20px;
-  padding: 20px;
-  box-sizing: border-box;
-  font-size: 14px;
-  line-height: 20px;
-}
-
-.input2 {
-  font-family: "Roboto", sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 50%;
-  border: 0;
-  margin: 0 0 10px;
-  padding: 8px;
-  box-sizing: border-box;
-  font-size: 14px;
-}
-
-.form {
-  position: relative;
-  z-index: 1;
-  background: #FFFFFF;
-  max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 45px;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}
-
-.login-page {
-  width: 360px;
-  padding: 8% 0 0;
-  margin: auto;
-}
-
-</style>

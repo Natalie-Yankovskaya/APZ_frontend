@@ -1,0 +1,220 @@
+
+body {
+    background: #AFEEEE;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+//navbar
+#nav{
+    margin: 0;
+    padding: 0;
+    margin-left: 240px;
+    margin-right: 240px;
+    list-style-type: none; 
+    border: 2px double #000000; 
+    height: 30px;
+    width: 1023px;
+    text-align: center;
+    background: rgb(138, 185, 223);
+}
+
+#nav li{
+  display: inline;
+}
+
+#nav li a{
+      font-size: 16px; 
+        color: #000000;
+        padding: 5px 10px; 
+        text-decoration: none;
+        
+        display: inline-block; 
+        width: 140px;
+        height: 20px;
+}
+#nav li a:hover{
+        background-color: rgb(55, 92, 224);
+        color: #FFFFFF;
+        text-align: center;
+        font-weight: bold;
+      }
+
+
+// flags for localization
+.flags {
+  display: inline;
+  width: 10 px;
+  height: 5 px;
+}
+
+//input blocks
+.input1 {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.input2 {
+  outline: 0;
+  background: #f2f2f2;
+  width: 50%;
+  border: 0;
+  margin: 0 0 10px;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+// login page form
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+//block
+.nextpers {
+    padding-top:10px;
+    width: 1005px;
+    padding-left:20px;
+    height:750px;
+    background:rgba( 128, 128, 128, 0.7);
+    margin-left: 240px;
+    margin-left: 240px;
+    margin: 0 px;
+}
+  
+  .table1
+  {
+    
+    float: left;
+    display: block;
+    border: 1px;
+    margin: 2px;
+    overflow:hidden;
+    width:400px;
+    height:150px;
+  }
+
+
+
+//rectengle for information output
+.rectangle {
+  counter-reset: li; 
+  list-style: none; 
+  font: 14px "Trebuchet MS", "Lucida Sans";
+  padding: 0;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  
+}
+
+.rectangle li {
+  position: relative;
+  display: block;
+  padding: .4em .4em .4em .8em;
+  margin: .5em 0 .5em 2.5em;
+  background: #D3D4DA;
+  color: #444;
+  text-decoration: none;
+  transition: all .3s ease-out;
+  width: 500px;
+}
+
+.rectangle li:hover {
+    background: #DCDDE1;
+} 
+
+.rectangle li:before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  left: -2.5em;
+  top: 50%;
+  margin-top: -1em;
+  background: rgb(238,236,192);
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.rectangle li:after {
+  position: absolute;
+  content: "";
+  border: .5em solid transparent;
+  left: -1em;
+  top: 50%;
+  margin-top: -.5em;
+  transition: all .3s ease-out;
+}
+
+.rectangle li:hover:after {
+  left: -.5em;
+  border-left-color: rgb(238,236,192);
+}
+ 
+//delete button 
+.delete_button {  
+    background: #F08080;
+    display: inline-block;
+}
+  
+select {
+    width: 360px;
+    margin: 0 0 20px;
+    padding: 20px;
+    background: #f2f2f2;
+}
+
+.table1 {
+    float: left;
+    display: block;
+    border: 1px;
+    margin: 2px;
+    overflow:hidden;
+    width:400px;
+    height:150px;
+}
+      
+      
+.cute_button {
+    background: rgb(138, 185, 223);
+    display: inline-block;
+    font-size: 18px;  
+}
+
+.login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+}
+      
+.div1 {
+    margin-top: 10%;
+}
